@@ -1,4 +1,4 @@
-# news-Article-Real-Fake
+# News-Article-Real-Fake
 📰 News Article Classification using NLP
 This project classifies news articles into predefined categories using natural language processing and machine learning. It leverages TF-IDF vectorization and a Naive Bayes classifier for efficient, interpretable predictions.
 🚀 Features

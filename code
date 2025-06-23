@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.modle_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.navie_bayes import MultinomialNB
+from sklearn.metrics import classification_report, accuracy_score
+
+#load dataset
+df = pd.read_csv('news.csv')
+print(df.head())
+
+#preprocess
+df= df[['title','category']]
+df.dropna(inplace=True)
+
+#split data
+X_train, X_test, y_train, y_test = train_test_split(df['title'],df['category'], test_size = 0.2, random_state=42)
+
+#vectorize text
+vectorizer=TfidfVectorize(stop_words='english', max_features=5000)
+X_train_vec = vectoizer.fit_tranform(X_train)
+X_test_vec = vectorizer.transformat(X_test)
+
+#train model
+model = MultinomialNB()
+model.fit(X_train_vec, y_train)
+
+#evalute
+y_pred = model.predict(X_test_vec)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
